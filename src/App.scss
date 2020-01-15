@@ -10,3 +10,18 @@
 		margin-left: 3rem;
 	}
 }
+
+@media (max-width: 768px) {
+	#app {
+		flex-direction: column;
+
+		main {
+			margin-left: 0;
+			margin-top: 3rem;
+		}
+
+		aside {
+			width: 100%;
+		}
+	}
+}

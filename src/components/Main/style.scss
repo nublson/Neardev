@@ -60,3 +60,11 @@ main {
 		}
 	}
 }
+
+@media (max-width: 425px) {
+	main {
+		ul {
+			grid-template-columns: 1fr;
+		}
+	}
+}
