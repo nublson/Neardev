@@ -1,99 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+import api from '../../services/api'
 
 import './style.scss'
 
 const Main = () => {
+	const [devs, setDevs] = useState([])
+
+	useEffect(() => {
+		async function loadDevs() {
+			const response = await api.get('/devs')
+
+			setDevs(response.data)
+		}
+
+		loadDevs()
+	}, [devs])
+
 	return (
 		<main>
 			<ul>
-				<li className='dev-item'>
-					<header>
-						<img
-							src='https://avatars1.githubusercontent.com/u/46088089?v=4'
-							alt='Nubelson Fernandes'
-						/>
-						<div className='user-info'>
-							<strong>Nubelson Fernandes</strong>
-							<span>NodeJS, ReactJS and React Native</span>
-						</div>
-					</header>
-					<p>
-						A 22 years old self-taugth Full-Stack Developer with
-						Node and React from Angola, currently living in
-						Portugal.
-					</p>
-					<a
-						href='https://github.com/nubelsondev'
-						target='_blank'
-						rel='noopener noreferrer'
-					>
-						Access Github Profile
-					</a>
-				</li>
-				<li className='dev-item'>
-					<header>
-						<img
-							src='https://avatars1.githubusercontent.com/u/46088089?v=4'
-							alt='Nubelson Fernandes'
-						/>
-						<div className='user-info'>
-							<strong>Nubelson Fernandes</strong>
-							<span>NodeJS, ReactJS and React Native</span>
-						</div>
-					</header>
-					<p>
-						A 22 years old self-taugth Full-Stack Developer with
-						Node and React from Angola, currently living in
-						Portugal.
-					</p>
-					<a
-						href='https://github.com/nubelsondev'
-						target='_blank'
-						rel='noopener noreferrer'
-					>
-						Access Github Profile
-					</a>
-				</li>
-				<li className='dev-item'>
-					<header>
-						<img
-							src='https://avatars1.githubusercontent.com/u/46088089?v=4'
-							alt='Nubelson Fernandes'
-						/>
-						<div className='user-info'>
-							<strong>Nubelson Fernandes</strong>
-							<span>NodeJS, ReactJS and React Native</span>
-						</div>
-					</header>
-					<p>
-						A 22 years old self-taugth Full-Stack Developer with
-						Node and React from Angola, currently living in
-						Portugal.
-					</p>
-					<a href='https://github.com/nubelsondev'>
-						Access Github Profile
-					</a>
-				</li>
-				<li className='dev-item'>
-					<header>
-						<img
-							src='https://avatars1.githubusercontent.com/u/46088089?v=4'
-							alt='Nubelson Fernandes'
-						/>
-						<div className='user-info'>
-							<strong>Nubelson Fernandes</strong>
-							<span>NodeJS, ReactJS and React Native</span>
-						</div>
-					</header>
-					<p>
-						A 22 years old self-taugth Full-Stack Developer with
-						Node and React from Angola, currently living in
-						Portugal.
-					</p>
-					<a href='https://github.com/nubelsondev'>
-						Access Github Profile
-					</a>
-				</li>
+				{devs.map(dev => (
+					<li key={dev._id} className='dev-item'>
+						<header>
+							<img src={dev.avatar_url} alt={dev.name} />
+							<div className='user-info'>
+								<strong>{dev.name}</strong>
+								<span>{dev.techs.join(', ')}</span>
+							</div>
+						</header>
+						<p>{dev.bio}</p>
+						<a
+							href={`https://github.com/${dev.github_username}`}
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							Access Github Profile
+						</a>
+					</li>
+				))}
 			</ul>
 		</main>
 	)
