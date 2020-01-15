@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 
+import api from '../../services/api'
+
 import './style.scss'
 
 const Aside = () => {
@@ -32,8 +34,18 @@ const Aside = () => {
 				latitude: latitude,
 				longitude: longitude
 			}}
-			onSubmit={(values, actions) => {
-				console.log(values)
+			onSubmit={async (
+				{ github_username, techs, latitude, logitude },
+				actions
+			) => {
+				const response = await api.post('/devs', {
+					github_username,
+					techs,
+					latitude,
+					longitude
+				})
+
+				console.log(response)
 
 				actions.resetForm()
 			}}
