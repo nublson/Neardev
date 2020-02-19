@@ -2,7 +2,8 @@
 
 Mobile version [here](https://github.com/nubelsondev/Neardev-Mobile).
 
-![Nearby Preview](./thumbnail.png)
+![Nearby Preview](./neardev.png)
+
 
 This is Neardev's web frontend, an application that allows developers to register using the github username, technologies of interest and location (actual location obtained by the browser) and lists all users registered in the application.
 
